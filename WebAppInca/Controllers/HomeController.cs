@@ -22,7 +22,10 @@ namespace WebAppInca.Controllers
         {
             return View();
         }
-
+        public IActionResult Inicio()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {
