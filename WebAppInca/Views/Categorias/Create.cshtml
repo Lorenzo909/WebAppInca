@@ -4,9 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Categoria</h4>
+<h1>Crear Categoria</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -24,14 +22,18 @@
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-primary">List Categoria</a>
+                <a class="btn btn-primary text-W" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Materiales</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" asp-area="" asp-controller="Materiales" asp-action="Index">Lista</a></li>
+                    <li><a class="dropdown-item" asp-area="" asp-controller="Materiales" asp-action="Create">Agregar</a></li>
+                </ul>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

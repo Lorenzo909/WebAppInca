@@ -33,22 +33,23 @@
                 <span asp-validation-for="Medida" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UnidadId" class="control-label"></label>
-                <select asp-for="UnidadId" class ="form-control" asp-items="ViewBag.UnidadId"></select>
+                <label asp-for="UnidadId" class="control-label">Unidad</label>
+                <select asp-for="UnidadId" class="form-control" asp-items="ViewBag.UnidadId"></select>
+                <a asp-controller="Unidads" asp-action="Create">Crear Unidad</a>
+
             </div>
             <div class="form-group">
-                <label asp-for="CategoriaId" class="control-label"></label>
-                <select asp-for="CategoriaId" class ="form-control" asp-items="ViewBag.CategoriaId"></select>
+                <label asp-for="CategoriaId" class="control-label">Categoria</label>
+                <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId"></select>
+                <a asp-controller="Categorias" asp-action="Create">Crear Categoria</a>
             </div>
+            
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-primary">Regresar</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
