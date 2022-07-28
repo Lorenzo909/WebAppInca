@@ -4,11 +4,9 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Material</h4>
+<h1>Crear Material</h1>
 <hr />
-<div class="row">
+<div class="row-">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -22,7 +20,7 @@
                 <input asp-for="Nombre" class="form-control" />
                 <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-form-label-sm">
                 <label asp-for="Cantidad" class="control-label"></label>
                 <input asp-for="Cantidad" class="form-control" />
                 <span asp-validation-for="Cantidad" class="text-danger"></span>
@@ -33,24 +31,33 @@
                 <span asp-validation-for="Medida" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UnidadId" class="control-label">Unidad</label>
+                <a class="nav-link dropdown-toggle text-black" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Unidad</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" asp-area="" asp-controller="Unidades" asp-action="Create">Crear Unidad</a></li>
+                    <li><a class="dropdown-item" asp-area="" asp-controller="Unidades" asp-action="Create">Lista Unidades</a></li>
+                </ul>
                 <select asp-for="UnidadId" class="form-control" asp-items="ViewBag.UnidadId"></select>
-                <a asp-controller="Unidads" asp-action="Create">Crear Unidad</a>
-
             </div>
             <div class="form-group">
-                <label asp-for="CategoriaId" class="control-label">Categoria</label>
+                <a class="nav-link dropdown-toggle text-black" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categoria</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" asp-area="" asp-controller="Categorias" asp-action="Create">Crear Categoria</a></li>
+                    <li><a class="dropdown-item" asp-area="" asp-controller="Categorias" asp-action="Create">Lista Categorias</a></li>
+                </ul>
                 <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId"></select>
-                <a asp-controller="Categorias" asp-action="Create">Crear Categoria</a>
             </div>
-            
+            <div>
+                ________________________________________________________
+            </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-primary">Regresar</a>
-            </div>
+                 <input type="submit" value="Create" class="btn btn-primary" />
+                 <a asp-action="Index" class="btn btn-primary">Regresar</a>
+            </div>        
         </form>
     </div>
 </div>
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

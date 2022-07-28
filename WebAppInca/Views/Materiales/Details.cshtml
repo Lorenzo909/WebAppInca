@@ -4,47 +4,59 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Detailles de Materiales</h1>
 
 <div>
-    <h4>Material</h4>
+    
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Codigo)
+        <dt class="col-sm-2">
+            Codigo
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Codigo)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
+        <dt class="col-sm-2">
+           Nombre
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Nombre)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cantidad)
+        <dt class="col-sm-2">
+            Cantidad
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Cantidad)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Medida)
+        <dt class="col-sm-2">
+            Medida
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Medida)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria)
+        <dt class="col-sm-2">
+            Categoria
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.Id)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Categoria.Nombre)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Unidad)
+        <dt class="col-sm-2">
+           Descripcio
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Unidad.Id)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Categoria.Descripcion)
+        </dd>
+        <dt class="col-sm-2">
+            Simbología
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Unidad.Simbolo)
+        </dd>
+        <dt class="col-sm-2">
+          Nombre
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Unidad.Discripcion)
         </dd>
     </dl>
 </div>

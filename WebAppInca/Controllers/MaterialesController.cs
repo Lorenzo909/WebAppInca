@@ -18,6 +18,11 @@ namespace WebAppInca.Controllers
         {
             _context = context;
         }
+        public async Task<IActionResult> BuscarMaterial()
+        {
+            var applicationDBContext = _context.Material.Include(p => p.Categoria).Include(p => p.Unidad);
+            return View(await applicationDBContext.ToListAsync());
+        }
 
         // GET: Materiales
         public async Task<IActionResult> Index()
@@ -49,8 +54,8 @@ namespace WebAppInca.Controllers
         // GET: Materiales/Create
         public IActionResult Create()
         {
-            ViewData["CategoriaId"] = new SelectList(_context.Categoria, "Id", "Id");
-            ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Id");
+            ViewData["CategoriaId"] = new SelectList(_context.Categoria, "Id", "Nombre");
+            ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Discripcion");
             return View();
         }
 
@@ -67,8 +72,8 @@ namespace WebAppInca.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoriaId"] = new SelectList(_context.Categoria, "Id", "Id", material.CategoriaId);
-            ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Id", material.UnidadId);
+            ViewData["CategoriaId"] = new SelectList(_context.Categoria, "Id", "Nombre", material.CategoriaId);
+            ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Discripcion", material.UnidadId);
             return View(material);
         }
 
@@ -85,8 +90,8 @@ namespace WebAppInca.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoriaId"] = new SelectList(_context.Categoria, "Id", "Id", material.CategoriaId);
-            ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Id", material.UnidadId);
+            ViewData["CategoriaId"] = new SelectList(_context.Categoria, "Id", "Nombre", material.CategoriaId);
+            ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Discripcion", material.UnidadId);
             return View(material);
         }
 
@@ -122,8 +127,8 @@ namespace WebAppInca.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoriaId"] = new SelectList(_context.Categoria, "Id", "Id", material.CategoriaId);
-            ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Id", material.UnidadId);
+            ViewData["CategoriaId"] = new SelectList(_context.Categoria, "Id", "Nombre", material.CategoriaId);
+            ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Discripcion", material.UnidadId);
             return View(material);
         }
 
