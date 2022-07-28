@@ -12,37 +12,37 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Codigo)
+           Codigo
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Codigo)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
+            Nombre
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Nombre)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cantidad)
+            Cantidad
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Cantidad)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Medida)
+            Medida
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Medida)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria)
+            Categoria
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Categoria.Id)
         </dd class>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Unidad)
+            Unidad
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Unidad.Id)
@@ -52,6 +52,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index" class="btn btn-danger">Regresar a Lista</a>
     </form>
 </div>
