@@ -49,8 +49,8 @@ namespace WebAppInca.Controllers
         // GET: Facturas/Create
         public IActionResult Create()
         {
-            ViewData["CuentaId"] = new SelectList(_context.Cuenta, "Id", "Id");
-            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Id");
+            ViewData["CuentaId"] = new SelectList(_context.Cuenta, "Id", "Nombre");
+            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Nombre");
             return View();
         }
 
@@ -67,8 +67,8 @@ namespace WebAppInca.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CuentaId"] = new SelectList(_context.Cuenta, "Id", "Id", factura.CuentaId);
-            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Id", factura.ProveedorId);
+            ViewData["CuentaId"] = new SelectList(_context.Cuenta, "Id", "Nombre", factura.CuentaId);
+            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Nombre", factura.ProveedorId);
             return View(factura);
         }
 
@@ -85,8 +85,8 @@ namespace WebAppInca.Controllers
             {
                 return NotFound();
             }
-            ViewData["CuentaId"] = new SelectList(_context.Cuenta, "Id", "Id", factura.CuentaId);
-            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Id", factura.ProveedorId);
+            ViewData["CuentaId"] = new SelectList(_context.Cuenta, "Id", "Nombre", factura.CuentaId);
+            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Nombre", factura.ProveedorId);
             return View(factura);
         }
 
@@ -122,8 +122,8 @@ namespace WebAppInca.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CuentaId"] = new SelectList(_context.Cuenta, "Id", "Id", factura.CuentaId);
-            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Id", factura.ProveedorId);
+            ViewData["CuentaId"] = new SelectList(_context.Cuenta, "Id", "Nombre", factura.CuentaId);
+            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Nombre", factura.ProveedorId);
             return View(factura);
         }
 

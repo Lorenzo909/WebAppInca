@@ -1,8 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebAppInca.Data;
 using WebAppInca.Models;
@@ -11,97 +12,142 @@ namespace WebAppInca.Controllers
 {
     public class CuentasController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly ApplicationDbContext _context;
 
-        public CuentasController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public CuentasController(ApplicationDbContext context)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-
+            _context = context;
         }
 
-        // GET: CuentasController
-        public ActionResult Index()
+        // GET: Cuentas
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Cuenta.ToListAsync());
+        }
+
+        // GET: Cuentas/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var cuenta = await _context.Cuenta
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (cuenta == null)
+            {
+                return NotFound();
+            }
+
+            return View(cuenta);
+        }
+
+        // GET: Cuentas/Create
+        public IActionResult Create()
         {
             return View();
         }
 
-        // GET: CuentasController/Details/5
-        public IActionResult Register()
-        {
-            return View();
-        }
-        // POST: CuentasController/Create
+        // POST: Cuentas/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(User model)
+        public async Task<IActionResult> Create([Bind("Id,Nombre")] Cuenta cuenta)
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser
-                {
-                    UserName = model.Username,
-
-                };
-
-                var result = await _userManager.CreateAsync(user, model.Password);
-
-                if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-
-                    return RedirectToAction("index", "Home");
-                }
-
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
-
-                ModelState.AddModelError(string.Empty, "Ingreso Invalido");
-
+                _context.Add(cuenta);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            return View(model);
+            return View(cuenta);
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult Login()
+        // GET: Cuentas/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var cuenta = await _context.Cuenta.FindAsync(id);
+            if (cuenta == null)
+            {
+                return NotFound();
+            }
+            return View(cuenta);
         }
 
+        // POST: Cuentas/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(Login user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre")] Cuenta cuenta)
         {
+            if (id != cuenta.Id)
+            {
+                return NotFound();
+            }
+
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(user.Username, user.Password, user.RememberMe, true);
-
-                if (result.Succeeded)
+                try
                 {
-                    return RedirectToAction("Inicio", "Home");
+                    _context.Update(cuenta);
+                    await _context.SaveChangesAsync();
                 }
-
-                if (result.IsLockedOut)
-
-                    ModelState.AddModelError("", "La cuenta a sido bloqueada, Intenta dentro de 1 minutos");
-
-                ModelState.AddModelError(string.Empty, "Inicio Fallido, Usuario o Contrasenia Incorrecta");
-
-
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CuentaExists(cuenta.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(cuenta);
         }
 
-        public async Task<IActionResult> Logout()
+        // GET: Cuentas/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
-            await _signInManager.SignOutAsync();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            return RedirectToAction("Index", "Home");
+            var cuenta = await _context.Cuenta
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (cuenta == null)
+            {
+                return NotFound();
+            }
+
+            return View(cuenta);
+        }
+
+        // POST: Cuentas/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var cuenta = await _context.Cuenta.FindAsync(id);
+            _context.Cuenta.Remove(cuenta);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool CuentaExists(int id)
+        {
+            return _context.Cuenta.Any(e => e.Id == id);
         }
     }
 }

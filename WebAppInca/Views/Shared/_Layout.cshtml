@@ -16,7 +16,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Corporacion Incaprefa</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Privacy">Corporacion Incaprefa</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -27,16 +27,22 @@
                         {
 
                             <ul class="navbar-nav flex-grow-1">
-                                <li class="nav-item">
-                                    <a class="nav-link text-light active" asp-area="" asp-controller="Home" asp-action="Inicio">Corporacion Incaprefa</a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Proveedores</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Proveedores" asp-action="Index">Lista</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Proveedores" asp-action="Create">Crear</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Proveedores" asp-action="BuscarMaterial">Buscar</a></li>
+                                    </ul>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Materiales</a>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" asp-area="" asp-controller="Materiales" asp-action="Index">Lista</a></li>
                                         <li><a class="dropdown-item" asp-area="" asp-controller="Materiales" asp-action="Create">Crear</a></li>
-                                       <li><a class="dropdown-item" asp-area="" asp-controller="Materiales" asp-action="BuscarMaterial">Buscar</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Materiales" asp-action="BuscarMaterial">Buscar</a></li>
                                     </ul>
+                                </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Herramientas</a>
                                     <ul class="dropdown-menu">
@@ -72,7 +78,7 @@
 
 
                                 <li class="nav-item">
-                                    <a class="nav-link text-light" asp-area="" asp-controller="Cuentas" asp-action="Logout">Cerrar Secion</a>
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Usuarios" asp-action="Logout">Cerrar Secion</a>
                                 </li>
 
                             </ul>
@@ -81,10 +87,10 @@
                         {
                             <div class="navbar-nav flex-grow-1">
                                 <li class="nav-item">
-                                    <a class="nav-link text-light" asp-area="" asp-controller="Cuentas" asp-action="Login">Login</a>
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Usuarios" asp-action="Login">Login</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-light" asp-area="" asp-controller="Cuentas" asp-action="Register">Register</a>
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Usuarios" asp-action="Register">Register</a>
                                 </li>
                             </div>
                         }
@@ -114,3 +120,4 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+                                         
