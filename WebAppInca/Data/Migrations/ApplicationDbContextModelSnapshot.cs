@@ -227,10 +227,10 @@ namespace WebAppInca.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 
@@ -245,19 +245,19 @@ namespace WebAppInca.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Apellido")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int?>("ServicioId")
                         .HasColumnType("int");
 
                     b.Property<string>("Telefono")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(30)");
 
                     b.HasKey("Id");
 
@@ -274,7 +274,7 @@ namespace WebAppInca.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 
@@ -439,7 +439,9 @@ namespace WebAppInca.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal?>("Pago")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("decimal(18,2)")
+                        .HasComputedColumnSql("([Horas]*[PrecioHora])");
 
                     b.Property<decimal?>("PrecioHora")
                         .HasColumnType("decimal(18,2)");
@@ -521,7 +523,9 @@ namespace WebAppInca.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("Utilidad")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("decimal(18,2)")
+                        .HasComputedColumnSql("([GastoMaterial]-[GastoManoObra])");
 
                     b.HasKey("Id");
 
@@ -702,13 +706,13 @@ namespace WebAppInca.Data.Migrations
                     b.HasOne("WebAppInca.Models.Empleado", "Empleado")
                         .WithMany("Planilla")
                         .HasForeignKey("EmpleadoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasConstraintName("FK_Empleado")
                         .IsRequired();
 
                     b.HasOne("WebAppInca.Models.Puesto", "Puesto")
                         .WithMany("Planilla")
                         .HasForeignKey("PuestoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasConstraintName("FK_Puesto")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618
